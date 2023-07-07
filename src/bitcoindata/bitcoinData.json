@@ -1,0 +1,36 @@
+{
+    "data" :[
+        {
+            "symbol": "BTC",
+            "name": "Bitcoin",
+            "price(USD)": "27000.34",
+            "changes": ""
+
+        },
+        {
+            "symbol": "ETH",
+            "name": "Etherium",
+            "price(USD)": "1859.12",
+            "changes": "" 
+        },
+        {
+            "symbol": "ADA",
+            "name": "cardano",
+            "price(USD)": "0.39",
+            "changes": ""
+        },
+        {
+            "symbol": "BNB",
+            "name": "BNB",
+            "price(USD)": "330.98",
+            "changes": ""
+        },
+        {
+            "symbol": "XRP",
+            "name": "Ripple",
+            "price(USD)": "0.40",
+            "changes": ""
+        }
+    
+    ]
+}
