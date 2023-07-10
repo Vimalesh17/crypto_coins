@@ -1,30 +1,33 @@
 import React from "react";
+import {Link,useLocation} from "react-router-dom"
 
 const CoinDetails = () => {
+  const location = useLocation();
+  const coinDetails = location.state;
   return (
     <>
       <h4>Details</h4>
-      <table>
-        <thead>
+      <table className="tableDetail">
+        <thead className="tablehead">
           <tr>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>price</th>
-            <th>market cap</th>
-            <th>change</th>
-            <th>Rank</th>
-            <th>24 hr volume</th>
+            <th className="tablehead">Symbol</th>
+            <th className="tablehead">Name</th>
+            <th className="tablehead">price</th>
+            <th className="tablehead">market cap</th>
+            <th className="tablehead">change</th>
+            <th className="tablehead">Rank</th>
+            <th className="tablehead">24 hr volume</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>BTC</td>
-            <td>Bitcoin</td>
-            <td>27000.34</td>
-            <td>530,916,053,785</td>
-            <td>-1.00</td>
-            <td>1</td>
-            <td>16,114,915,103</td>
+        <tbody className="tablebody1">
+          <tr >
+            <td className="tablebody1">{coinDetails.symbol}</td>
+            <td className="tablebody1">{coinDetails.name}</td>
+            <td className="tablebody1">{coinDetails.price}</td>
+            <td className="tablebody1">{coinDetails.marketCap}</td>
+            <td className="tablebody1">{coinDetails.change}</td>
+            <td className="tablebody1">{coinDetails.rank}</td>
+            <td className="tablebody1">{coinDetails['24hVolume']}</td>
           </tr>
         </tbody>
       </table>

@@ -1,1 +1,18 @@
+.tableBorder{
+    border: 2px solid black;
+    height: 100vh;
+    width: 100vw;
+    padding: 5px;
+}
+.btn.btn-secondary{
+    width: 25%;
+    margin: 15px;
+    padding: 5px;
+}
+.tablebody{
+    border: 1px solid black;
 
+}
+.tableHeader{
+    border: 1px solid black;
+}
