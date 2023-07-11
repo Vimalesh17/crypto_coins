@@ -2,21 +2,21 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import CoinDetails from "./coindetails";
 import { Link } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
 
 const CryptoTable = () => {
-const [pageNumber,setPageNumber]= useState(0);
+  const [pageNumber, setPageNumber] = useState(0);
   const [tableRes, setTableRes] = useState<any>();
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     getApi();
   }, []);
-  const getApi = async (page?:string) => {
-    if(page=="next"){
-     setPageNumber(pageNumber+1);
-    }else if(page=="previous"){
-      setPageNumber(pageNumber-1);
+  const getApi = async (page?: string) => {
+    if (page == "next") {
+      setPageNumber(pageNumber + 1);
+    } else if (page == "previous") {
+      setPageNumber(pageNumber - 1);
     }
-      
-
 
     const options = {
       method: "GET",
@@ -35,16 +35,80 @@ const [pageNumber,setPageNumber]= useState(0);
         "X-RapidAPI-Host": "coinranking1.p.rapidapi.com",
       },
     };
+    setLoader(true);
     let res = await Axios.request(options);
     setTableRes(res);
+    setLoader(false);
     console.log(res);
   };
+
+ function changeValue (data:any){
+    if(data.includes('-')){
+      return <div style={{color:'red'}}>{data}</div>
+    }else{
+      return <div style={{color:'green'}}> {data}</div>
+    }
+  }
 
   return (
     <>
       {/* <button onClick={() => getApi()}>Price Listing</button> */}
-      <h4>Price List</h4>
-      <table className="tableBorder">
+      
+      {loader ? (
+        <div className="container">
+          <PulseLoader className="loader">
+            {/* <div className="text-center">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden"></span>
+              </div>
+            </div> */}
+          </PulseLoader>
+
+        </div>
+      ) : (
+        
+        <table className="tableBorder">
+          <thead>
+            <tr>
+              <th className="tableHeader">Symbol</th>
+              <th className="tableHeader">Name</th>
+              <th className="tableHeader">Price(USD)</th>
+              <th className="tableHeader">Changes(%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tableRes?.data.data.coins.map((i: any) => {
+              return (
+                <tr>
+                  <td className="tablebody">
+                    <Link to={{ pathname: "/details" }} state={i}>
+                      {i.symbol}
+                    </Link>
+                  </td>
+                  <td className="tablebody">{i.name}</td>
+                  <td className="tablebody">{i.price}</td>
+                  <td className="tablebody">{changeValue(i.change)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <span>
+            {pageNumber !== 0 ? (
+              <button
+                className="btn btn-secondary"
+                onClick={() => getApi("previous")}
+              >
+                Previous
+              </button>
+            ) : null}
+          </span>
+
+          <button className="btn btn-secondary" onClick={() => getApi("next")}>
+            Next
+          </button>
+        </table>
+      )}
+      {/* <table className="tableBorder">
         <thead>
           <tr>
             <th className="tableHeader">Symbol</th>
@@ -54,29 +118,36 @@ const [pageNumber,setPageNumber]= useState(0);
           </tr>
         </thead>
         <tbody>
-          {tableRes?.data.data.coins.map(
-            (i: any) => {
-              return (
-                <tr>
-                  <td className="tablebody">
-                    <Link to={{ pathname: "/details" }} state={i}>
-                      {i.symbol}
-                    </Link>
-                  </td >
-                  <td className="tablebody">{i.name}</td>
-                  <td className="tablebody">{i.price}</td>
-                  <td className="tablebody">{i.change}</td>
-                </tr>
-              );
-            }
-          )}
+          {tableRes?.data.data.coins.map((i: any) => {
+            return (
+              <tr>
+                <td className="tablebody">
+                  <Link to={{ pathname: "/details" }} state={i}>
+                    {i.symbol}
+                  </Link>
+                </td>
+                <td className="tablebody">{i.name}</td>
+                <td className="tablebody">{i.price}</td>
+                <td className="tablebody">{i.change}</td>
+              </tr>
+            );
+          })}
         </tbody>
         <span>
-        {pageNumber !==0 ? <button className="btn btn-secondary" onClick={()=>getApi("previous")}>Previous</button>: null}
-         </span>
-        
-        <button className="btn btn-secondary" onClick={()=>getApi("next")} >Next</button>
-      </table>
+          {pageNumber !== 0 ? (
+            <button
+              className="btn btn-secondary"
+              onClick={() => getApi("previous")}
+            >
+              Previous
+            </button>
+          ) : null}
+        </span>
+
+        <button className="btn btn-secondary" onClick={() => getApi("next")}>
+          Next
+        </button>
+      </table> */}
     </>
   );
 };
