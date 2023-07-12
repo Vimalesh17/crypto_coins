@@ -1,13 +1,23 @@
 import React from "react";
 import {Link,useLocation} from "react-router-dom"
+import { FaCaretDown,FaCaretUp } from "react-icons/fa";
 
 const CoinDetails = () => {
   const location = useLocation();
   const coinDetails = location.state;
+  function changeValue (data:any){
+    if(data.includes('-')){
+      return <div style={{color:'red'}} ><FaCaretDown style={{color:"red"}}/>{data}
+      </div>
+    }else{
+      return <div style={{color:'green'}}> <FaCaretUp style={{color:"green"}}/> {data}</div>
+    }
+  }
   return (
     <>
       <h4>Details</h4>
-      <table className="tableDetail">
+      <div className="maincontainer">
+        <table className="tableDetail">
         <thead className="tablehead">
           <tr>
             <th className="tablehead">Symbol</th>
@@ -25,12 +35,14 @@ const CoinDetails = () => {
             <td className="tablebody1">{coinDetails.name}</td>
             <td className="tablebody1">{coinDetails.price}</td>
             <td className="tablebody1">{coinDetails.marketCap}</td>
-            <td className="tablebody1">{coinDetails.change}</td>
+            <td className="tablebody1">{changeValue(coinDetails.change)}</td>
             <td className="tablebody1">{coinDetails.rank}</td>
             <td className="tablebody1">{coinDetails['24hVolume']}</td>
           </tr>
         </tbody>
       </table>
+      </div>
+      
     </>
   );
 };

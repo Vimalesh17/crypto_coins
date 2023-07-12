@@ -3,6 +3,8 @@ import Axios from "axios";
 import CoinDetails from "./coindetails";
 import { Link } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
+import { FaCaretDown,FaCaretUp } from "react-icons/fa";
+
 
 const CryptoTable = () => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -44,9 +46,10 @@ const CryptoTable = () => {
 
  function changeValue (data:any){
     if(data.includes('-')){
-      return <div style={{color:'red'}}>{data}</div>
+      return <div style={{color:'red'}} ><FaCaretDown style={{color:"red"}}/>{data}
+      </div>
     }else{
-      return <div style={{color:'green'}}> {data}</div>
+      return <div style={{color:'green'}}> <FaCaretUp style={{color:"green"}}/> {data}</div>
     }
   }
 

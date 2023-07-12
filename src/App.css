@@ -22,4 +22,24 @@
     width: 100%;
     height: 100%;
 }
+.maincontainer{
+    width: 100vw;
+    display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
 
+}
+.tableDetail{
+    border: 2px solid black;
+    width: 50%;
+    margin-right: 50%;
+}
+.tablehead{
+    border: 1px solid black;
+    padding: 10px;
+    width: 100%;
+}
+.tablebody1{
+    border: 1px solid black;
+    padding: 10px;
+}
