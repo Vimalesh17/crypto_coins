@@ -9,6 +9,12 @@
     margin: 15px;
     padding: 5px;
 }
+.btn.btn-danger{
+    width: 25%;
+    margin: 5px;
+    padding: 5px;
+
+}
 .tablebody{
     border: 1px solid black;
 

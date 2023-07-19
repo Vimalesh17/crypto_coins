@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import CoinDetails from "./coindetails";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { PulseLoader } from "react-spinners";
 import { FaCaretDown,FaCaretUp } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 const CryptoTable = () => {
+  const goBack = useNavigate();
   const [pageNumber, setPageNumber] = useState(0);
   const [tableRes, setTableRes] = useState<any>();
   const [loader, setLoader] = useState(false);
@@ -51,6 +53,10 @@ const CryptoTable = () => {
     }else{
       return <div style={{color:'green'}}> <FaCaretUp style={{color:"green"}}/> {data}</div>
     }
+  }
+  function removeData (){
+    localStorage.removeItem("user");
+    goBack("/");
   }
 
   return (
@@ -109,6 +115,11 @@ const CryptoTable = () => {
           <button className="btn btn-secondary" onClick={() => getApi("next")}>
             Next
           </button>
+          <button className="btn btn-danger" onClick={() =>removeData()}>
+            Logout
+          </button>
+          
+
         </table>
       )}
       {/* <table className="tableBorder">
